@@ -1,44 +1,31 @@
-xxHashSharp
+SqlxxHashSharp
 ===========
 
-A pure C# implementation of [xxhash](http://code.google.com/p/xxhash/)
+A SQLCLR SAFE implementation of xxHashSharp, which returns a xxHash32 has as SqlInt32, that can be deployed to SQL Server or Azure SQL Managed Instance.
 
+Note that only SAFE assemblies are supported in Linux and as such only [Supported Libraries](https://learn.microsoft.com/en-us/sql/relational-databases/clr-integration/database-objects/supported-net-framework-libraries?view=sql-server-ver16#supported-libraries) maybe be referenced in the assembly. xxHashSharp's code base meets this requirement.
 
-## Installation
+## Path to implementation
 
-1. From Nuget
-
- * Download from [Nuget](https://www.nuget.org/packages/xxHashSharp/)
- * Also, run the following command in the Package Manager Console.
-
-   ```
-   PM > Install-Package xxHashSharp
-   ```
-
-2. From Source
- * You can just clone this repo.
-
-
-## Example
-
-```csharp
-byte[] input = Encoding.UTF8.GetBytes("hello world");
-
-xxHash hash = new xxHash();
-hash.Init();
-hash.Update(input, input.Count());
-...
-Console.WriteLine("{0:X}", hash.Digest());
-```	
-
-or
-
-```csharp
-
-byte[] input = Encoding.UTF8.GetBytes("hello world");
-Console.WriteLine("{0:X}", xxHash.CalculateHash(input));
+1. Compile xxHashSharp.cs to a .NET Framework 4.8 assembly named SqlxxHashSharp.dll
+2. Copy SqlxxHashSharp.dll to a location accessible by SQL Server.
+3. Create the assembly in a database:
+```sql
+create assembly xxhash32 from 'c:/tmp/CLR/SqlXxHashSharp.dll' with permission_set = safe;
 ```
+4. Create a function referencing the method to be called:
+```sql
+create function dbo.XxHash32(@Value varbinary(max))
+returns int
+external name xxhash32.xxHash.CalculateHash;
+```
+5. Test it...
+```sql
+declare @vb varbinary(max) = convert(varbinary, 'hello world');
+select dbo.XxHash32(@vb);
+```
+6. Verfiy it...
 
-## License
+-826579422 is 0xCEBB6622, which matches the output from [Generate a xxh hash value](https://www.coderstool.com/xxh-hash-generator)
 
-BSD 2-clause license.
+8. Declare victory!
