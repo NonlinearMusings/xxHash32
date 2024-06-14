@@ -17,7 +17,7 @@ create assembly xxhash32 from 'c:/tmp/CLR/SqlXxHashSharp.dll' with permission_se
 ```sql
 create function dbo.XxHash32(@Value varbinary(max))
 returns int
-external name xxhash32.xxHash.CalculateHash;
+external name xxhash32.xxHashSharp.Hash32ToInt;
 ```
 5. Test it...
 ```sql
