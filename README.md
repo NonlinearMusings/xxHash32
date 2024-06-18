@@ -3,7 +3,7 @@ SqlxxHashSharp
 
 A SQLCLR SAFE implementation of xxHashSharp, which returns a xxHash32 has as SqlInt32, that can be deployed to SQL Server or Azure SQL Managed Instance.
 
-Note that only SAFE assemblies are supported in Linux and as such only [Supported Libraries](https://learn.microsoft.com/en-us/sql/relational-databases/clr-integration/database-objects/supported-net-framework-libraries?view=sql-server-ver16#supported-libraries) maybe be referenced in the assembly. xxHashSharp's code base meets this requirement.
+Note that only SAFE assemblies are supported in Linux and as such only [Supported Libraries](https://learn.microsoft.com/en-us/sql/relational-databases/clr-integration/database-objects/supported-net-framework-libraries?view=sql-server-ver16#supported-libraries) may be referenced in the assembly. xxHashSharp's code base meets this requirement.
 
 ## Path to implementation
 
