@@ -28,4 +28,4 @@ select dbo.XxHash32(@vb);
 
 -826579422 is 0xCEBB6622, which matches the output from [Generate a xxh hash value](https://www.coderstool.com/xxh-hash-generator)
 
-8. Declare victory!
+7. Declare victory!
