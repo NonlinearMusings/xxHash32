@@ -1,4 +1,4 @@
-SqlxxHashSharp
+xxHash32
 ===========
 
 A SQLCLR SAFE implementation of xxHashSharp, which returns a xxHash32 has as SqlInt32, that can be deployed to SQL Server or Azure SQL Managed Instance.
